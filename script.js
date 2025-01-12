@@ -66,3 +66,36 @@ document.addEventListener('DOMContentLoaded', function() {
     updateAge();
     setInterval(updateAge, 1000); // Update age every second
 });
+
+// Disable right-click
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Disable text selection
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
+// Disable image drag and drop
+document.addEventListener('dragstart', function(e) {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+    }
+});
+
+// Disable image download
+document.addEventListener('mousedown', function(e) {
+    if (e.button === 2 && e.target.tagName === 'IMG') {
+        e.preventDefault();
+    }
+});
+
+// Gyroscope effect for mobile devices
+if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', function(event) {
+        const x = event.gamma; // In degree in the range [-90,90]
+        const y = event.beta; // In degree in the range [-180,180]
+        document.body.style.backgroundPosition = `${50 + x / 3}% ${50 + y / 3}%`;
+    }, true);
+}
